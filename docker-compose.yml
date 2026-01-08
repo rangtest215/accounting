@@ -1,0 +1,7 @@
+services:
+  web:
+    build: .
+    container_name: accounting_app
+    ports:
+      - "80:80"
+    restart: always
