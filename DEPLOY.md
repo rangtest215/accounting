@@ -95,11 +95,24 @@ scp -r src public Dockerfile docker-compose.yml nginx.conf package.json vite.con
 
 ## Troubleshooting
 
-### "KeyError: 'ContainerConfig'"
-If you see this error, you are using the old `docker-compose` (v1).
-1.  Uninstall the old one: `apt-get remove docker-compose`
-2.  Install the new one (if not already): `apt-get install docker-compose-plugin`
-3.  Use `docker compose` (space, not hyphen).
+### "KeyError: 'ContainerConfig'" or "Unable to locate package"
+This means you have an old or broken Docker installation. The easiest fix is to reinstall using the official script:
+
+1.  **Remove old versions**:
+    ```bash
+    apt-get remove docker docker-engine docker.io containerd runc docker-compose
+    ```
+
+2.  **Install modern Docker (includes Compose)**:
+    ```bash
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sh get-docker.sh
+    ```
+
+3.  **Try again**:
+    ```bash
+    docker compose up -d --build
+    ```
 
 ## Updating the Application
 
