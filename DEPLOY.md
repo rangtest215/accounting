@@ -29,6 +29,27 @@ This guide explains how to deploy your accounting application to a Linode server
     systemctl enable docker
     ```
 
+## Step 1.5: Configure Environment Variables
+
+**Crucial Step**: Your app needs Firebase keys to work.
+
+1.  **Create a `.env` file** in your project folder on the server:
+    ```bash
+    nano ~/accounting_app/.env
+    ```
+    (Or wherever you plan to put your code)
+
+2.  **Paste your keys** (Copy them from your local `.env` file):
+    ```env
+    VITE_FIREBASE_API_KEY=your_key_here
+    VITE_FIREBASE_AUTH_DOMAIN=your_domain_here
+    VITE_FIREBASE_PROJECT_ID=your_id_here
+    VITE_FIREBASE_STORAGE_BUCKET=your_bucket_here
+    VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id_here
+    VITE_FIREBASE_APP_ID=your_app_id_here
+    ```
+    *Press `Ctrl+X`, then `Y`, then `Enter` to save.*
+
 ## Step 2: Transfer Your Code
 
 You have two main options:
