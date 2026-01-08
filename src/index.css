@@ -1,0 +1,101 @@
+:root {
+  /* Premium Dark Theme Palette */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #1a1a1a;
+  --bg-card: rgba(30, 30, 30, 0.6);
+  
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  
+  --accent-primary: #6366f1; /* Indigo */
+  --accent-income: #10b981; /* Emerald */
+  --accent-expense: #ef4444; /* Red */
+  
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  min-width: 320px;
+}
+
+#root {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Utilities */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.btn-primary {
+  background: var(--accent-primary);
+  color: white;
+  border: none;
+  padding: 0.8em 1.5em;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+}
+
+input, select, textarea {
+  background: var(--bg-secondary);
+  border: var(--glass-border);
+  color: var(--text-primary);
+  padding: 0.8em;
+  border-radius: 8px;
+  width: 100%;
+  margin-bottom: 1rem;
+  outline: none;
+  font-size: 1rem;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent-primary);
+}
