@@ -19,11 +19,15 @@ This guide explains how to deploy your accounting application to a Linode server
 2.  **Install Docker and Docker Compose**:
     (If not already installed)
     ```bash
+    ```bash
     apt-get update
-    apt-get install -y docker.io docker-compose
+    # The default repo often has an old version. We'll use the official script for the latest version.
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sh get-docker.sh
     ```
 
 3.  **Start Docker**:
+    (The script usually starts it, but just in case)
     ```bash
     systemctl start docker
     systemctl enable docker
@@ -78,7 +82,8 @@ scp -r src public Dockerfile docker-compose.yml nginx.conf package.json vite.con
 
 2.  **Build and Run**:
     ```bash
-    docker-compose up -d --build
+    # Note: Use 'docker compose' (v2, no hyphen) instead of 'docker-compose' (v1)
+    docker compose up -d --build
     ```
     - `-d`: Runs in detached mode (background).
     - `--build`: Forces a rebuild of the image.
@@ -87,6 +92,14 @@ scp -r src public Dockerfile docker-compose.yml nginx.conf package.json vite.con
 
 1.  Open your browser and visit `http://<your-linode-ip>`.
 2.  You should see your application running.
+
+## Troubleshooting
+
+### "KeyError: 'ContainerConfig'"
+If you see this error, you are using the old `docker-compose` (v1).
+1.  Uninstall the old one: `apt-get remove docker-compose`
+2.  Install the new one (if not already): `apt-get install docker-compose-plugin`
+3.  Use `docker compose` (space, not hyphen).
 
 ## Updating the Application
 
@@ -97,5 +110,5 @@ When you make changes locally:
     ```bash
     cd ~/accounting_app
     git pull                  # If using Git
-    docker-compose up -d --build
+    docker compose up -d --build  # Use the new command
     ```
