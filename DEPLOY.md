@@ -102,6 +102,7 @@ This means you have an old or broken Docker installation. The easiest fix is to 
     ```bash
     apt-get remove docker docker-engine docker.io containerd runc docker-compose
     ```
+    *Note: It is normal to see "Unable to locate package" errors here if you didn't have those specific versions installed. You can safely ignore them and proceed.*
 
 2.  **Install modern Docker (includes Compose)**:
     ```bash
