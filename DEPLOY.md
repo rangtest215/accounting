@@ -131,6 +131,15 @@ rm /usr/local/bin/docker-compose
 ```
 Then use `docker compose` (with space).
 
+### "Conflict. The container name is already in use"
+This happens if an old container is stuck. Remove it manually:
+```bash
+docker rm -f accounting_app
+# OR
+docker compose down
+```
+Then try `docker compose up -d --build` again.
+
 ## Updating the Application
 
 When you make changes locally:
