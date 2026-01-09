@@ -69,12 +69,17 @@ export const addCategory = async (uid, name) => {
 
     try {
         const colRef = collection(db, "users", uid, "categories");
-        const q = query(colRef, where("name", "==", normalizedName));
-        const snapshot = await getDocs(q);
+        // Get all categories to check case-insensitively
+        const snapshot = await getDocs(colRef);
 
-        if (!snapshot.empty) {
-            console.log(`Category "${normalizedName}" already exists.`);
-            return; // Already exists, do nothing
+        const exists = snapshot.docs.some(doc => {
+            const existingName = doc.data().name;
+            return existingName && existingName.toLowerCase().trim() === normalizedName.toLowerCase();
+        });
+
+        if (exists) {
+            console.log(`Category "${normalizedName}" already exists (case-insensitive match).`);
+            return;
         }
 
         await addDoc(colRef, {
@@ -133,11 +138,22 @@ export const seedDefaults = async (uid) => {
         snapshot.docs.forEach(doc => {
             const data = doc.data();
             const name = data.name;
-            if (seen.has(name)) {
+            const normalized = name ? name.toLowerCase().trim() : '';
+
+            if (!normalized) {
+                // Clean up empty names
+                batch.delete(doc.ref);
+                hasDuplicates = true;
+                return;
+            }
+
+            if (seen.has(normalized)) {
+                // Duplicate found (ignore case)
+                console.log(`[db.js] Found duplicate category: "${name}" (keeping first instance)`);
                 batch.delete(doc.ref);
                 hasDuplicates = true;
             } else {
-                seen.add(name);
+                seen.add(normalized);
             }
         });
 
