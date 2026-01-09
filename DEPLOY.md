@@ -90,7 +90,7 @@ scp -r src public Dockerfile docker-compose.yml nginx.conf package.json vite.con
 
 ## Step 4: Verify
 
-1.  Open your browser and visit `http://<your-linode-ip>`.
+1.  Open your browser and visit `http://<your-linode-ip>:3001`.
 2.  You should see your application running.
 
 ## Troubleshooting
@@ -114,6 +114,14 @@ This means you have an old or broken Docker installation. The easiest fix is to 
     ```bash
     docker compose up -d --build
     ```
+
+### "Cannot connect to the Docker daemon"
+This means Docker isn't running. Start it manually:
+```bash
+systemctl start docker
+systemctl enable docker
+```
+Then try running your app again.
 
 ### Still seeing "KeyError" or old version quirks?
 You might have a leftover binary that `apt-get` didn't catch. Delete it specifically:
