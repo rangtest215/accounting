@@ -115,6 +115,14 @@ This means you have an old or broken Docker installation. The easiest fix is to 
     docker compose up -d --build
     ```
 
+### Still seeing "KeyError" or old version quirks?
+You might have a leftover binary that `apt-get` didn't catch. Delete it specifically:
+```bash
+rm /usr/bin/docker-compose
+rm /usr/local/bin/docker-compose
+```
+Then use `docker compose` (with space).
+
 ## Updating the Application
 
 When you make changes locally:
